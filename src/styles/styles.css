@@ -1,0 +1,23 @@
+:root {
+  --backgroundColor: rgb(64, 83, 117);
+  --backgroundColorLight: rgb(103, 132, 170);
+  --bodyColor: rgb(235, 227, 206);
+  --lightgrey: rgb(214, 214, 214);
+  --grey: rgb(146, 146, 146);
+  --darkgrey: rgb(83, 83, 83);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+.weatherDetailIcon {
+  width: 40px;
+  height: 40px;
+}
