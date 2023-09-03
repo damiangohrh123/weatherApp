@@ -32,10 +32,11 @@ const processData = (weatherData) => {
       c: `${weatherData.current.temp_c} °C`,
       f: `${weatherData.current.temp_f} °C`,
     },
-    wind: weatherData.current.wind_kph,
-    humidity: weatherData.current.humidity,
+    wind: `${weatherData.current.wind_kph} km/h`,
+    humidity: `${weatherData.current.humidity} %`,
     location: `${weatherData.location.name.toUpperCase()}, ${weatherData.location.country.toUpperCase()}`,
     time: weatherData.location.localtime,
+    chanceToRain: `${weatherData.forecast.forecastday[0].day.daily_chance_of_rain} %`
   };
 
   return myData;
@@ -43,11 +44,17 @@ const processData = (weatherData) => {
 
 const displayData = (processedData) => {
 
+  // Weather description
   document.querySelector('#description').textContent = processedData.condition;
   document.querySelector('#location').textContent = processedData.location;
   document.querySelector('#date').textContent = processedData.time;
   document.querySelector('#temperature').textContent = processedData.currentTemp.c;
-  //document.querySelector('#weatherIcon').textContent = processedData.;
+
+  // Weather details
+  document.querySelector('#feelsLike').textContent = processedData.feelsLike.c;
+  document.querySelector('#humidity').textContent = processedData.humidity;
+  document.querySelector('#chanceOfRain').textContent = processedData.chanceToRain;
+  document.querySelector('#windSpeed').textContent = processedData.wind;
   
 }
 

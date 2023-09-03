@@ -62,24 +62,32 @@ const createSearch = () => {
 };
 
 const createWeatherDetails = (details) => {
-  const weatherDetails = document.createElement('div');
+  const weatherDetailsContainer = document.createElement('div');
+  weatherDetailsContainer.classList.add('weatherDetailsContainer');
 
   // Create and append weather details
   for (let i = 0; i < details.length; i++) {
+    const weatherDetails = document.createElement('div');
+    weatherDetails.classList.add('weatherDetails');
     const icon = document.createElement('img');
     icon.src = details[i].iconSrc;
-    icon.classList.add('weatherDetailIcon');
+    icon.classList.add('weatherDetailsIcon');
+
+    const weatherDetailsInfo = document.createElement('weatherDetailsInfo');
     const label = document.createElement('p');
     label.textContent = details[i].label;
     const data = document.createElement('p');
+    data.setAttribute('id', details[i].name);
     data.textContent = details[i].data;
 
     weatherDetails.appendChild(icon);
-    weatherDetails.appendChild(label);
-    weatherDetails.appendChild(data);
+    weatherDetailsInfo.appendChild(label);
+    weatherDetailsInfo.appendChild(data);
+    weatherDetails.appendChild(weatherDetailsInfo)
+    weatherDetailsContainer.appendChild(weatherDetails);
   }
 
-  content.appendChild(weatherDetails);
+  content.appendChild(weatherDetailsContainer);
 };
 
 const createWeatherForecast = () => {};
