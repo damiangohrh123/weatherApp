@@ -5,7 +5,7 @@ import './styles/styles.css';
 import Morning from './images/morningBackground.jpg';
 import Night from './images/nightBackground.jpg';
 import Rain from './images/rain.png';
-import Humidity from './images/humidity.png'
+import Humidity from './images/humidity.png';
 import Thermometer from './images/thermometer.png';
 import Wind from './images/wind.png';
 

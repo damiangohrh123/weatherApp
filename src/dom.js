@@ -84,7 +84,7 @@ const createWeatherDetails = (details) => {
     weatherDetails.appendChild(icon);
     weatherDetailsInfo.appendChild(label);
     weatherDetailsInfo.appendChild(data);
-    weatherDetails.appendChild(weatherDetailsInfo)
+    weatherDetails.appendChild(weatherDetailsInfo);
     weatherDetailsContainer.appendChild(weatherDetails);
   }
 
@@ -115,7 +115,6 @@ const createHourlyForecast = () => {
   }
   content.appendChild(hourlyForecastContainer);
 };
-
 
 export {
   createWeatherInfo,

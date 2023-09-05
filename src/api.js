@@ -97,29 +97,44 @@ const displayData = (processedData) => {
       const nextHour = (i + 1) % 24;
 
       if (nextHour !== 0) {
-        const forecastedTime = String(new Date(processedData.forecastDay[nextHour].time).getHours()).padStart(2, '0');
-        document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedTime}00`;
+        const forecastedTime = processedData.forecastDay[nextHour];
+        const forecastedHour = String(new Date(forecastedTime.time).getHours()).padStart(2, '0');
+
+        document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedHour}00`;
+        document.querySelector(`#hourlyForecastIcon${elementIndex}`).src = `https:${forecastedTime.condition.icon}`;
+        document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c}`;
 
       } else if (nextHour === 0){
-        const forecastedTime = String(new Date(processedData.forecastNextDay[nextHour].time).getHours()).padStart(2, '0');
-        document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedTime}00`;
+        const forecastedTime = processedData.forecastNextDay[nextHour];
+        const forecastedHour = String(new Date(forecastedTime.time).getHours()).padStart(2, '0');
+
+        document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedHour}00`;
+        document.querySelector(`#hourlyForecastIcon${elementIndex}`).src = `https:${forecastedTime.condition.icon}`;
+        document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c}`;
       }
     }
 
     for (let i = 1 ; i < remainingTime + 1; i++) {
       let nextDayIndex = indexLeftOff + i;
 
-      const forecastedTime = String(new Date(processedData.forecastNextDay[i].time).getHours()).padStart(2, '0');
-      document.querySelector(`#hourlyForecastTime${nextDayIndex}`).textContent = `${forecastedTime}00`;
+      const forecastedTime = processedData.forecastNextDay[i];
+      const forecastedHour = String(new Date(forecastedTime.time).getHours()).padStart(2, '0');
+      
+      document.querySelector(`#hourlyForecastTime${nextDayIndex}`).textContent = `${forecastedHour}00`;
+      document.querySelector(`#hourlyForecastIcon${nextDayIndex}`).src = `https:${forecastedTime.condition.icon}`;
+      document.querySelector(`#hourlyForecastTemperature${nextDayIndex}`).textContent = `${forecastedTime.temp_c}`;
     }
 
   } else {
     for (let i = forecastStartTime, elementIndex = 0; i < forecastEndTime; i++, elementIndex++) {
       const nextTime = i + 1;
 
-      document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = processedData.forecastDay[nextTime].time;
-      //console.log('ElementIndex' + elementIndex);
-      console.log('Next time' + nextTime);
+      const forecastedTime = processedData.forecastDay[nextTime];
+      const forecastedHour = String(new Date(forecastedTime.time).getHours()).padStart(2, '0');
+
+      document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedHour}00`;
+      document.querySelector(`#hourlyForecastIcon${elementIndex}`).src = `https:${forecastedTime.condition.icon}`;
+      document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c}`;
     }
   }
 }
