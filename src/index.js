@@ -13,10 +13,10 @@ import Wind from './images/wind.png';
 import {
   createWeatherInfo,
   createWeatherDetails,
-  createWeatherForecast,
+  createHourlyForecast,
   createSearch,
 } from './dom.js';
-import { getWeatherData , getForecast} from './api';
+import { getWeatherData } from './api';
 
 /* PLACEHOLDER. WILL BE IN  API.JS LATER */
 const weatherDetails = [
@@ -50,4 +50,4 @@ createSearch();
 createWeatherInfo();
 createWeatherDetails(weatherDetails);
 getWeatherData('singapore');
-getForecast();
+createHourlyForecast();

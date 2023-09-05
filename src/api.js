@@ -4,7 +4,7 @@ import Night from './images/nightBackground.jpg';
 
 const getWeatherData = async (location) => {
   const response = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=195eeb5762ae44fab22142534232908&q=${location}`,
+    `http://api.weatherapi.com/v1/forecast.json?key=195eeb5762ae44fab22142534232908&q=${location}&days=7`,
     { mode: 'cors' },
   );
 
@@ -13,8 +13,8 @@ const getWeatherData = async (location) => {
     let processedData = processData(json);
 
     // Debugging purposes
-    //console.log(json);
-    //console.log(processedData);
+    console.log(json);
+    console.log(processedData);
     // 
 
     displayData(processedData);
@@ -24,24 +24,12 @@ const getWeatherData = async (location) => {
 
 };
 
-const getForecast = async () => {
-  const response = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=195eeb5762ae44fab22142534232908&q=${location}&days=7`,
-    { mode: 'cors' },
-  );
-  if (response.status === 200) {
-    let json = await response.json();
-    let processedData = processData(json);
-
-    // Debugging purposes
-    console.log(json);
-    //console.log(processedData);
-    // 
-  }
-}
-
 const processData = (weatherData) => {
-  // Grab all the data and I want to display on the page
+
+  /**
+   * Grab all the data and I want to display on the page
+   * This data is for the current day
+   *  */ 
   const myData = {
     condition: weatherData.current.condition.text,
     feelsLike: {
@@ -58,7 +46,15 @@ const processData = (weatherData) => {
     time: weatherData.location.localtime,
     chanceToRain: `${weatherData.forecast.forecastday[0].day.daily_chance_of_rain} %`,
     isDay: weatherData.current.is_day,
-    icon: weatherData.current.condition.icon
+    icon: weatherData.current.condition.icon,
+
+  /**
+   * This data is the current day's forecast
+   *  */ 
+    forecastDay: weatherData.forecast.forecastday[0].hour,
+    forecastNextDay: weatherData.forecast.forecastday[1].hour,
+    forecastWeek: weatherData.forecast.forecastday,
+
   };
 
   return myData;
@@ -85,10 +81,53 @@ const displayData = (processedData) => {
     document.body.style.backgroundImage = `url(${Night})`;
   }
 
-  // Condition
+  // Condition Icon
   const absoluteUrl = `https:${processedData.icon}`;
   document.querySelector('#weatherIcon').src = absoluteUrl;
+
+  // Hourly forecast for current day
+  const forecastStartTime = new Date(processedData.time).getHours();
+  let forecastEndTime = forecastStartTime + 6;
+
+  if (forecastEndTime > 24) {
+    const remainingTime = forecastEndTime - 24;
+    const indexLeftOff = 6 - (remainingTime + 1);
+
+    for (let i = forecastStartTime, elementIndex = 0; i < 24; i++, elementIndex++){
+      const nextHour = (i + 1) % 24;
+
+      if (nextHour !== 0) {
+        const forecastedTime = String(new Date(processedData.forecastDay[nextHour].time).getHours()).padStart(2, '0');
+        document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedTime}00`;
+
+      } else if (nextHour === 0){
+        const forecastedTime = String(new Date(processedData.forecastNextDay[nextHour].time).getHours()).padStart(2, '0');
+        document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedTime}00`;
+      }
+    }
+
+    for (let i = 1 ; i < remainingTime + 1; i++) {
+      let nextDayIndex = indexLeftOff + i;
+
+      const forecastedTime = String(new Date(processedData.forecastNextDay[i].time).getHours()).padStart(2, '0');
+      document.querySelector(`#hourlyForecastTime${nextDayIndex}`).textContent = `${forecastedTime}00`;
+    }
+
+  } else {
+    for (let i = forecastStartTime, elementIndex = 0; i < forecastEndTime; i++, elementIndex++) {
+      const nextTime = i + 1;
+
+      document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = processedData.forecastDay[nextTime].time;
+      //console.log('ElementIndex' + elementIndex);
+      console.log('Next time' + nextTime);
+    }
+  }
 }
 
 
-export { getWeatherData , getForecast};
+const displayForecastDay = () => {
+
+}
+
+
+export { getWeatherData };

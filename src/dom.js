@@ -91,18 +91,35 @@ const createWeatherDetails = (details) => {
   content.appendChild(weatherDetailsContainer);
 };
 
-const createWeatherForecast = () => {};
+const createHourlyForecast = () => {
+  const hourlyForecastContainer = document.createElement('div');
+  hourlyForecastContainer.classList.add('hourlyForecastContainer');
 
-const backgroundChange = () => {
-  if (isDay) {
+  // Create and append weather forecast for next 6 hours
+  for (let i = 0; i < 6; i++) {
+    const card = document.createElement('div');
+    card.classList.add('hourlyForecast');
 
+    const time = document.createElement('p');
+    time.setAttribute('id', `hourlyForecastTime${i}`);
+    const icon = document.createElement('img');
+    icon.setAttribute('id', `hourlyForecastIcon${i}`);
+    const temperature = document.createElement('p');
+    temperature.setAttribute('id', `hourlyForecastTemperature${i}`);
+
+    card.appendChild(time);
+    card.appendChild(icon);
+    card.appendChild(temperature);
+
+    hourlyForecastContainer.appendChild(card);
   }
-}
+  content.appendChild(hourlyForecastContainer);
+};
 
 
 export {
   createWeatherInfo,
   createSearch,
   createWeatherDetails,
-  createWeatherForecast,
+  createHourlyForecast,
 };
