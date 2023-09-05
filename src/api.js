@@ -102,7 +102,7 @@ const displayData = (processedData) => {
 
         document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedHour}00`;
         document.querySelector(`#hourlyForecastIcon${elementIndex}`).src = `https:${forecastedTime.condition.icon}`;
-        document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c}`;
+        document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c} ℃`;
 
       } else if (nextHour === 0){
         const forecastedTime = processedData.forecastNextDay[nextHour];
@@ -110,7 +110,7 @@ const displayData = (processedData) => {
 
         document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedHour}00`;
         document.querySelector(`#hourlyForecastIcon${elementIndex}`).src = `https:${forecastedTime.condition.icon}`;
-        document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c}`;
+        document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c} ℃`;
       }
     }
 
@@ -122,7 +122,7 @@ const displayData = (processedData) => {
       
       document.querySelector(`#hourlyForecastTime${nextDayIndex}`).textContent = `${forecastedHour}00`;
       document.querySelector(`#hourlyForecastIcon${nextDayIndex}`).src = `https:${forecastedTime.condition.icon}`;
-      document.querySelector(`#hourlyForecastTemperature${nextDayIndex}`).textContent = `${forecastedTime.temp_c}`;
+      document.querySelector(`#hourlyForecastTemperature${nextDayIndex}`).textContent = `${forecastedTime.temp_c} ℃`;
     }
 
   } else {
@@ -134,7 +134,7 @@ const displayData = (processedData) => {
 
       document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedHour}00`;
       document.querySelector(`#hourlyForecastIcon${elementIndex}`).src = `https:${forecastedTime.condition.icon}`;
-      document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c}`;
+      document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c} ℃`;
     }
   }
 }

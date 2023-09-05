@@ -46,6 +46,7 @@ const createSearch = () => {
   searchForm.classList.add('searchForm');
   const searchInput = document.createElement('input');
   searchInput.classList.add('searchBar');
+  searchInput.placeholder = 'Search for country, city, etc.'
   searchInput.setAttribute = ('type', 'text');
 
   searchForm.addEventListener('submit', (e) => {
@@ -105,6 +106,7 @@ const createHourlyForecast = () => {
     const icon = document.createElement('img');
     icon.setAttribute('id', `hourlyForecastIcon${i}`);
     const temperature = document.createElement('p');
+    temperature.classList.add('hourlyForecastTemperature');
     temperature.setAttribute('id', `hourlyForecastTemperature${i}`);
 
     card.appendChild(time);

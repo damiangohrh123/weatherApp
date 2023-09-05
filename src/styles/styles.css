@@ -5,7 +5,7 @@
   --lightgrey: rgb(214, 214, 214);
   --grey: rgb(146, 146, 146);
   --darkgrey: rgb(83, 83, 83);
-  --card: rgba(0, 0, 0, 0.4);
+  --card: rgba(46, 48, 51, 0.685);
 }
 
 * {
@@ -41,7 +41,7 @@ body {
 .content {
   display: grid;
   grid-template-columns: 4fr 2fr;
-  grid-template-rows: 5% 1fr 1fr 1fr;
+  grid-template-rows: 6% 3fr 2fr 3fr;
   gap: 20px;
 
   padding: 50px;
@@ -49,16 +49,18 @@ body {
 
 .searchForm {
   grid-area: 1 / 1 / 2 / 2;
-  padding-right: 20px;
 }
 
 .searchBar {
   width: 100%;
-  height: 70%;
+  height: 100%;
 
-  padding: 5px;
-  font-size: 20px;
-  color: black;
+  padding: 0 20px;
+
+  font-size: 22px;
+  background-color: var(--card);
+  border: none;
+  border-radius: 0.5rem;
 }
 
 .weatherInfo {
@@ -68,9 +70,16 @@ body {
   align-items: center;
 
   padding: 20px;
+  max-height: 240px;
 
   background-color: var(--card);
   border-radius: 0.5rem;
+}
+
+#location {
+  max-width: 870px;
+  white-space: nowrap;
+  overflow-x: auto;
 }
 
 #temperature {
@@ -115,4 +124,41 @@ body {
   grid-area: 4 / 1 / 5 / 2;
 
   display: flex;
+  justify-content: space-around;
+
+  padding: 20px;
+
+  background-color: var(--card);
+  border-radius: 0.5rem;
+}
+
+.hourlyForecast {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hourlyForecast img{
+  width: 80px;
+  height: 80px;
+}
+
+.hourlyForecastTemperature {
+  font-size: 30px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 5px; /* Set the width of the scrollbar */
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ebebeb; /* Set the color of the thumb (scrollable area) */
+  border-radius: 6px; /* Round the corners of the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #acacac; /* Change the color on hover */
 }
