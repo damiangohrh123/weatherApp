@@ -16,6 +16,7 @@ import {
   createWeatherForecast,
   createSearch,
 } from './dom.js';
+import { getWeatherData , getForecast} from './api';
 
 /* PLACEHOLDER. WILL BE IN  API.JS LATER */
 const weatherDetails = [
@@ -45,7 +46,8 @@ const weatherDetails = [
   },
 ];
 
-
-createWeatherInfo();
 createSearch();
+createWeatherInfo();
 createWeatherDetails(weatherDetails);
+getWeatherData('singapore');
+getForecast();
