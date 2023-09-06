@@ -118,9 +118,49 @@ const createHourlyForecast = () => {
   content.appendChild(hourlyForecastContainer);
 };
 
+const createDailyForecast = () => {
+  const dailyForecastContainer = document.createElement('div');
+  dailyForecastContainer.classList.add('dailyForecastContainer');
+
+  // Create and append daily forecast elements for today + next 6 days
+  for (let i = 0; i < 7; i++) {
+    const card = document.createElement('div');
+    card.classList.add('dailyForecast');
+
+    const day = document.createElement('p');
+    day.setAttribute('id', `dailyForecastDay${i}`);
+
+    const conditionContainer = document.createElement('div');
+    conditionContainer.classList.add('conditionContainer');
+    const icon = document.createElement('img');
+    icon.setAttribute('id', `dailyForecastIcon${i}`);
+    const condition = document.createElement('p');
+    condition.setAttribute('id', `condition${i}`);
+
+    const temperatureContainer = document.createElement('div');
+    const temperatureMin = document.createElement('p');
+    temperatureMin.setAttribute('id', `temperatureMin${i}`);
+    const temperatureMax = document.createElement('p');
+    temperatureMax.setAttribute('id', `temperatureMax${i}`);
+
+    conditionContainer.appendChild(icon);
+    conditionContainer.appendChild(condition);
+    temperatureContainer.appendChild(temperatureMin);
+    temperatureContainer.appendChild(temperatureMax);
+
+    card.appendChild(day);
+    card.appendChild(conditionContainer);
+    card.appendChild(temperatureContainer);
+
+    dailyForecastContainer.appendChild(card);
+  }
+  content.appendChild(dailyForecastContainer);
+}
+
 export {
   createWeatherInfo,
   createSearch,
   createWeatherDetails,
   createHourlyForecast,
+  createDailyForecast
 };

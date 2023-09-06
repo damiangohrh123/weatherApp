@@ -13,12 +13,12 @@ import Wind from './images/wind.png';
 import {
   createWeatherInfo,
   createWeatherDetails,
-  createHourlyForecast,
   createSearch,
+  createHourlyForecast,
+  createDailyForecast
 } from './dom.js';
 import { getWeatherData } from './api';
 
-/* PLACEHOLDER. WILL BE IN  API.JS LATER */
 const weatherDetails = [
   {
     name: 'feelsLike',
@@ -51,3 +51,4 @@ createWeatherInfo();
 createWeatherDetails(weatherDetails);
 getWeatherData('singapore');
 createHourlyForecast();
+createDailyForecast();

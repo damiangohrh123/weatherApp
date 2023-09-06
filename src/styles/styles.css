@@ -148,6 +148,30 @@ body {
   font-size: 30px;
 }
 
+.dailyForecastContainer {
+  grid-area: 1 / 2 / 5 / 3;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 20px;
+
+  background-color: var(--card);
+  border-radius: 0.5rem;
+}
+
+.dailyForecast {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+}
+
+.conditionContainer {
+  display: flex;
+  align-items: center;
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 5px; /* Set the width of the scrollbar */

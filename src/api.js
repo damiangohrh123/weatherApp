@@ -53,6 +53,10 @@ const processData = (weatherData) => {
    *  */ 
     forecastDay: weatherData.forecast.forecastday[0].hour,
     forecastNextDay: weatherData.forecast.forecastday[1].hour,
+
+  /**
+   * This data is the forecast for the entire week
+   */
     forecastWeek: weatherData.forecast.forecastday,
 
   };
@@ -89,7 +93,7 @@ const displayData = (processedData) => {
   const forecastStartTime = new Date(processedData.time).getHours();
   let forecastEndTime = forecastStartTime + 6;
 
-  if (forecastEndTime > 24) {
+  if (forecastEndTime > 24 || forecastEndTime === 24) {
     const remainingTime = forecastEndTime - 24;
     const indexLeftOff = 6 - (remainingTime + 1);
 
@@ -137,12 +141,34 @@ const displayData = (processedData) => {
       document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c} ℃`;
     }
   }
+
+  // Daily forecast for current day and next 6 days
+  const daysArray = [];
+  for (let i = 0; i < 7; i++) {
+    daysArray.push(processedData.forecastWeek[i]);
+  }
+
+  // For debugging purposes
+  console.log(daysArray);
+
+  for (let i = 0; i < daysArray.length; i++) {
+    const date = new Date(daysArray[i].date);
+
+    // Get the day name
+    const dayName = date.toLocaleDateString('en-US', {weekday: 'long'});
+
+    // Change the first day's name to 'Today', display the next 6 days normally
+    if ( i !== 0) {
+      document.querySelector(`#dailyForecastDay${i}`).textContent = dayName;
+    } else if ( i === 0) {
+      document.querySelector(`#dailyForecastDay${i}`).textContent = 'Today';
+    }
+
+    document.querySelector(`#dailyForecastIcon${i}`).src = `https:${daysArray[i].day.condition.icon}`;
+    document.querySelector(`#condition${i}`).textContent = daysArray[i].day.condition.text;
+    document.querySelector(`#temperatureMin${i}`).textContent = `${daysArray[i].day.mintemp_c} ℃/`;
+    document.querySelector(`#temperatureMax${i}`).textContent = `${daysArray[i].day.maxtemp_c} ℃`;
+  }
 }
-
-
-const displayForecastDay = () => {
-
-}
-
 
 export { getWeatherData };
