@@ -78,12 +78,14 @@ const displayData = (processedData) => {
   document.querySelector('#chanceOfRain').textContent = processedData.chanceToRain;
   document.querySelector('#windSpeed').textContent = processedData.wind;
   
+  /*
   // Change background according to day or night
   if (processedData.isDay === 1) {
     document.body.style.backgroundImage = `url(${Morning})`;
   } else if (processedData.isDay === 0) {
     document.body.style.backgroundImage = `url(${Night})`;
   }
+  */
 
   // Condition Icon
   const absoluteUrl = `https:${processedData.icon}`;
@@ -149,7 +151,7 @@ const displayData = (processedData) => {
   }
 
   // For debugging purposes
-  console.log(daysArray);
+  //console.log(daysArray);
 
   for (let i = 0; i < daysArray.length; i++) {
     const date = new Date(daysArray[i].date);

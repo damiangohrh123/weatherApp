@@ -5,7 +5,7 @@
   --lightgrey: rgb(214, 214, 214);
   --grey: rgb(146, 146, 146);
   --darkgrey: rgb(83, 83, 83);
-  --card: rgba(46, 48, 51, 0.685);
+  --card: rgb(255, 255, 255);
 }
 
 * {
@@ -13,7 +13,7 @@
   padding: 0;
   margin: 0;
 
-  color: white;
+  color: rgb(63, 63, 63);
 }
 
 h1 {
@@ -61,6 +61,7 @@ body {
   background-color: var(--card);
   border: none;
   border-radius: 0.5rem;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .weatherInfo {
@@ -74,6 +75,7 @@ body {
 
   background-color: var(--card);
   border-radius: 0.5rem;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #location {
@@ -102,6 +104,7 @@ body {
 
   background-color: var(--card);
   border-radius: 0.5rem;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .weatherDetails {
@@ -117,7 +120,7 @@ body {
   width: 80px;
   height: 80px;
 
-  filter: invert(100%);
+  filter: invert(28%);
 }
 
 .hourlyForecastContainer {
@@ -130,6 +133,7 @@ body {
 
   background-color: var(--card);
   border-radius: 0.5rem;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .hourlyForecast {
@@ -159,6 +163,7 @@ body {
 
   background-color: var(--card);
   border-radius: 0.5rem;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .dailyForecast {
