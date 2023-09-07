@@ -2,7 +2,7 @@ import { throwErrorMsg, removeErrorMsg } from './dom';
 
 const getWeatherData = async (location) => {
   const response = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=195eeb5762ae44fab22142534232908&q=${location}&days=7`,
+    `https://api.weatherapi.com/v1/forecast.json?key=195eeb5762ae44fab22142534232908&q=${location}&days=7`,
     { mode: 'cors' },
   );
 
