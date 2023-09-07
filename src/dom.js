@@ -1,5 +1,7 @@
 import { getWeatherData } from './api.js';
 
+import GithubLogo from './images/githublogo.png';
+
 const content = document.querySelector('.content');
 
 const createWeatherInfo = () => {
@@ -7,6 +9,8 @@ const createWeatherInfo = () => {
   weatherInfo.classList.add('weatherInfo');
   const weatherInfoDetails = document.createElement('div');
   weatherInfoDetails.classList.add('weatherInfoDetails');
+  const weatherInfoIcon = document.createElement('div');
+  weatherInfoIcon.classList.add('weatherInfoIcon');
 
   // Create weather decription
   const description = document.createElement('h2');
@@ -30,10 +34,11 @@ const createWeatherInfo = () => {
 
   weatherInfoDetails.appendChild(location);
   weatherInfoDetails.appendChild(temperature);
-  weatherInfoDetails.appendChild(description);
   weatherInfoDetails.appendChild(date);
+  weatherInfoIcon.appendChild(icon);
+  weatherInfoIcon.appendChild(description);
   weatherInfo.appendChild(weatherInfoDetails);
-  weatherInfo.appendChild(icon);
+  weatherInfo.appendChild(weatherInfoIcon);
 
   content.appendChild(weatherInfo);
 };
@@ -48,6 +53,9 @@ const createSearch = () => {
   searchInput.classList.add('searchBar');
   searchInput.placeholder = 'Search for country, city, etc.'
   searchInput.setAttribute = ('type', 'text');
+  const errorMsg = document.createElement('span');
+  errorMsg.classList.add('errorMsg', 'errorMsgHidden');
+  errorMsg.textContent = 'No matching location found!';
 
   searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -57,6 +65,7 @@ const createSearch = () => {
   });
 
   searchForm.appendChild(searchInput);
+  searchForm.appendChild(errorMsg);
 
   search.appendChild(searchForm);
 
@@ -128,6 +137,7 @@ const createDailyForecast = () => {
     card.classList.add('dailyForecast');
 
     const day = document.createElement('p');
+    day.classList.add('dailyForecastDay');
     day.setAttribute('id', `dailyForecastDay${i}`);
 
     const conditionContainer = document.createElement('div');
@@ -157,10 +167,49 @@ const createDailyForecast = () => {
   content.appendChild(dailyForecastContainer);
 }
 
+const throwErrorMsg = () => {
+  const error = document.querySelector('.errorMsg');
+  error.classList.add('errorMsgActive');
+  error.classList.remove('errorMsgHidden');
+}
+
+const removeErrorMsg = () => {
+  const error = document.querySelector('.errorMsg');
+  error.classList.remove('errorMsgActive');
+  error.classList.add('errorMsgHidden');
+}
+
+const watermark = () => {
+  const container = document.createElement('div');
+  container.classList.add('watermark');
+  const madeByText = document.createTextNode('Made by: ');
+
+  const link = document.createElement('a');
+  link.href = 'https://github.com/damiangohrh123';
+
+  const logo = document.createElement('img');
+  logo.classList.add('githubLogo');
+  logo.src = GithubLogo;
+  logo.alt = 'git hub logo';
+
+  const name = document.createTextNode(' Damian');
+
+  link.appendChild(logo);
+  link.appendChild(name);
+
+  container.appendChild(madeByText);
+  container.appendChild(link);
+
+  content.appendChild(container);
+}
+
 export {
   createWeatherInfo,
   createSearch,
   createWeatherDetails,
   createHourlyForecast,
-  createDailyForecast
+  createDailyForecast,
+  throwErrorMsg,
+  removeErrorMsg,
+  watermark
 };

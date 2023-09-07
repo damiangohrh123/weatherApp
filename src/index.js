@@ -2,8 +2,6 @@
 import './styles/styles.css';
 
 // Import src
-import Morning from './images/morningBackground.jpg';
-import Night from './images/nightBackground.jpg';
 import Rain from './images/rain.png';
 import Humidity from './images/humidity.png';
 import Thermometer from './images/thermometer.png';
@@ -15,7 +13,8 @@ import {
   createWeatherDetails,
   createSearch,
   createHourlyForecast,
-  createDailyForecast
+  createDailyForecast,
+  watermark
 } from './dom.js';
 import { getWeatherData } from './api';
 
@@ -52,3 +51,4 @@ createWeatherDetails(weatherDetails);
 getWeatherData('singapore');
 createHourlyForecast();
 createDailyForecast();
+watermark();

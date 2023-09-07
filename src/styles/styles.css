@@ -1,11 +1,11 @@
 :root {
-  --backgroundColor: rgb(64, 83, 117);
-  --backgroundColorLight: rgb(103, 132, 170);
-  --bodyColor: rgb(235, 227, 206);
-  --lightgrey: rgb(214, 214, 214);
-  --grey: rgb(146, 146, 146);
-  --darkgrey: rgb(83, 83, 83);
+  --fontColor: rgb(63, 63, 63);
   --card: rgb(255, 255, 255);
+}
+
+@font-face {
+  font-family: 'baseFont'; /* The name you want to use for the font */
+  src: url('../fonts/Lato-Light.woff') format('truetype'); /* Path to the font file */
 }
 
 * {
@@ -13,7 +13,10 @@
   padding: 0;
   margin: 0;
 
-  color: rgb(63, 63, 63);
+  font-family: 'baseFont';
+  letter-spacing: 6px;
+
+  color: var(--fontColor);
 }
 
 h1 {
@@ -41,7 +44,7 @@ body {
 .content {
   display: grid;
   grid-template-columns: 4fr 2fr;
-  grid-template-rows: 6% 3fr 2fr 3fr;
+  grid-template-rows: 8% 3fr 2fr 3fr;
   gap: 20px;
 
   padding: 50px;
@@ -53,7 +56,7 @@ body {
 
 .searchBar {
   width: 100%;
-  height: 100%;
+  height: 80%;
 
   padding: 0 20px;
 
@@ -64,10 +67,30 @@ body {
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.errorMsg {
+  padding: 0 20px;
+
+  font-size: 20px;
+  font-weight: 900;
+  color: rgb(223, 21, 21);
+}
+
+.errorMsgHidden {
+  display: none;
+}
+
+.errorMsgActive {
+  display: block;
+}
+
+.searchBar:focus {
+  outline: none;
+}
+
 .weatherInfo {
   grid-area: 2 / 1 / 3 / 2;
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 4fr 2fr;
   align-items: center;
 
   padding: 20px;
@@ -78,14 +101,23 @@ body {
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.weatherInfoIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 #location {
-  max-width: 870px;
+  max-width: 700px;
   white-space: nowrap;
   overflow-x: auto;
+  
+  font-size: 30px;
 }
 
 #temperature {
-  font-size: 80px;
+  font-size: 100px;
 }
 
 #weatherIcon {
@@ -109,7 +141,7 @@ body {
 
 .weatherDetails {
   display: flex;
-  gap: 10px;
+  gap: 20px;
 }
 
 .weatherDetails p {
@@ -117,8 +149,8 @@ body {
 }
 
 .weatherDetailsIcon {
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
 
   filter: invert(28%);
 }
@@ -141,11 +173,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
 .hourlyForecast img{
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
 }
 
 .hourlyForecastTemperature {
@@ -168,13 +201,32 @@ body {
 
 .dailyForecast {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 2fr 3fr 20%;
   align-items: center;
+  gap: 20px;
+
+  padding-left: 10px;
+}
+
+.dailyForecastDay {
+  font-weight: 900;
 }
 
 .conditionContainer {
   display: flex;
   align-items: center;
+}
+
+.watermark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.githubLogo {
+  width: 20px;
+  height: 20px;
 }
 
 /* Scrollbar styling */

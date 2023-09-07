@@ -1,6 +1,4 @@
-// Import background images
-import Morning from './images/morningBackground.jpg';
-import Night from './images/nightBackground.jpg';
+import { throwErrorMsg, removeErrorMsg } from './dom';
 
 const getWeatherData = async (location) => {
   const response = await fetch(
@@ -15,13 +13,14 @@ const getWeatherData = async (location) => {
     // Debugging purposes
     console.log(json);
     console.log(processedData);
-    // 
 
     displayData(processedData);
+
+    removeErrorMsg();
   } else {
+    throwErrorMsg();
     throw new Error('Failed to fetch data');
   }
-
 };
 
 const processData = (weatherData) => {
@@ -33,17 +32,17 @@ const processData = (weatherData) => {
   const myData = {
     condition: weatherData.current.condition.text,
     feelsLike: {
-      c: `${weatherData.current.feelslike_c} ℃`,
+      c: `${weatherData.current.feelslike_c}°C`,
       f: `${weatherData.current.feelslike_f} ℉`,
     },
     currentTemp: {
-      c: `${weatherData.current.temp_c} ℃`,
+      c: `${weatherData.current.temp_c}°C`,
       f: `${weatherData.current.temp_f} ℉`,
     },
     wind: `${weatherData.current.wind_kph} km/h`,
     humidity: `${weatherData.current.humidity} %`,
     location: `${weatherData.location.name.toUpperCase()}, ${weatherData.location.country.toUpperCase()}`,
-    time: weatherData.location.localtime,
+    time: new Date(weatherData.location.localtime),
     chanceToRain: `${weatherData.forecast.forecastday[0].day.daily_chance_of_rain} %`,
     isDay: weatherData.current.is_day,
     icon: weatherData.current.condition.icon,
@@ -69,23 +68,14 @@ const displayData = (processedData) => {
   // Weather description
   document.querySelector('#description').textContent = processedData.condition;
   document.querySelector('#location').textContent = processedData.location;
-  document.querySelector('#date').textContent = processedData.time;
   document.querySelector('#temperature').textContent = processedData.currentTemp.c;
+  document.querySelector('#date').textContent = processedData.time.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false });
 
   // Weather details
   document.querySelector('#feelsLike').textContent = processedData.feelsLike.c;
   document.querySelector('#humidity').textContent = processedData.humidity;
   document.querySelector('#chanceOfRain').textContent = processedData.chanceToRain;
   document.querySelector('#windSpeed').textContent = processedData.wind;
-  
-  /*
-  // Change background according to day or night
-  if (processedData.isDay === 1) {
-    document.body.style.backgroundImage = `url(${Morning})`;
-  } else if (processedData.isDay === 0) {
-    document.body.style.backgroundImage = `url(${Night})`;
-  }
-  */
 
   // Condition Icon
   const absoluteUrl = `https:${processedData.icon}`;
@@ -108,7 +98,7 @@ const displayData = (processedData) => {
 
         document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedHour}00`;
         document.querySelector(`#hourlyForecastIcon${elementIndex}`).src = `https:${forecastedTime.condition.icon}`;
-        document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c} ℃`;
+        document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c}°C`;
 
       } else if (nextHour === 0){
         const forecastedTime = processedData.forecastNextDay[nextHour];
@@ -116,7 +106,7 @@ const displayData = (processedData) => {
 
         document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedHour}00`;
         document.querySelector(`#hourlyForecastIcon${elementIndex}`).src = `https:${forecastedTime.condition.icon}`;
-        document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c} ℃`;
+        document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c}°C`;
       }
     }
 
@@ -128,7 +118,7 @@ const displayData = (processedData) => {
       
       document.querySelector(`#hourlyForecastTime${nextDayIndex}`).textContent = `${forecastedHour}00`;
       document.querySelector(`#hourlyForecastIcon${nextDayIndex}`).src = `https:${forecastedTime.condition.icon}`;
-      document.querySelector(`#hourlyForecastTemperature${nextDayIndex}`).textContent = `${forecastedTime.temp_c} ℃`;
+      document.querySelector(`#hourlyForecastTemperature${nextDayIndex}`).textContent = `${forecastedTime.temp_c}°C`;
     }
 
   } else {
@@ -140,7 +130,7 @@ const displayData = (processedData) => {
 
       document.querySelector(`#hourlyForecastTime${elementIndex}`).textContent = `${forecastedHour}00`;
       document.querySelector(`#hourlyForecastIcon${elementIndex}`).src = `https:${forecastedTime.condition.icon}`;
-      document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c} ℃`;
+      document.querySelector(`#hourlyForecastTemperature${elementIndex}`).textContent = `${forecastedTime.temp_c}°C`;
     }
   }
 
@@ -157,7 +147,7 @@ const displayData = (processedData) => {
     const date = new Date(daysArray[i].date);
 
     // Get the day name
-    const dayName = date.toLocaleDateString('en-US', {weekday: 'long'});
+    const dayName = date.toLocaleDateString('en-US', {weekday: 'short'});
 
     // Change the first day's name to 'Today', display the next 6 days normally
     if ( i !== 0) {
@@ -168,8 +158,8 @@ const displayData = (processedData) => {
 
     document.querySelector(`#dailyForecastIcon${i}`).src = `https:${daysArray[i].day.condition.icon}`;
     document.querySelector(`#condition${i}`).textContent = daysArray[i].day.condition.text;
-    document.querySelector(`#temperatureMin${i}`).textContent = `${daysArray[i].day.mintemp_c} ℃/`;
-    document.querySelector(`#temperatureMax${i}`).textContent = `${daysArray[i].day.maxtemp_c} ℃`;
+    document.querySelector(`#temperatureMin${i}`).textContent = `${daysArray[i].day.mintemp_c}° C`;
+    document.querySelector(`#temperatureMax${i}`).textContent = `${daysArray[i].day.maxtemp_c}° C`;
   }
 }
 
