@@ -138,7 +138,7 @@ const createDailyForecast = () => {
 
     const day = document.createElement('p');
     day.classList.add('dailyForecastDay');
-    day.setAttribute('id', `dailyForecastDay${i}`);
+    day.setAttribute('id', `dailyForecastDay${i}`); 
 
     const conditionContainer = document.createElement('div');
     conditionContainer.classList.add('conditionContainer');
