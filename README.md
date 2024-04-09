@@ -1,6 +1,8 @@
-# weatherApp
+# Weather App
+Using API's to tell the weather.
 
-Creating a weather app using Javascript, HTML, and CSS
+## Live demo
+https://damiangohrh123.github.io/weatherApp/
 
 UPDATE
 -Completed weather app.
